@@ -1,0 +1,85 @@
+@triggerPlusSize: 30px;
+
+x-nest-collapsible {
+  float:left;
+  border:1px solid @elementThemeColor;
+  border-radius:@borderRadius;
+  width:100%;
+  cursor:default;
+  margin-bottom:@elementPadding;
+  background:white;
+}
+
+[data-element-type] x-nest-collapsible:last-of-type {
+  margin-bottom:0px !important;
+}
+
+.nest-inner x-nest-collapsible:last-child {
+  margin-bottom:0em !important;
+}
+
+x-nest-collapsible-trigger {
+  float:left;
+  width:100%;
+  cursor:pointer;
+  padding:@elementPadding;
+  box-sizing:border-box;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+x-nest-collapsible-icon {
+  float:right;
+  font-size:@titleSize;
+  color : @elementIcon;
+  margin-right: 2px;
+  position:relative;
+  top:2px;
+}
+
+x-nest-collapsible-trigger > span {
+  font-size:@triggerPlusSize;
+  float:left;
+  color:@elementThemeColor;
+  margin-right:@elementPadding;
+  height:10px;
+  position:relative;
+  top:-9px;
+}
+
+x-nest-collapsible-trigger h2 {
+  float:left;
+  margin:0em;
+  padding:0em;
+  font-family: @titleFont;
+  font-size: @titleSize;
+  font-weight:normal;
+  color : @elementText;
+  margin-right:@elementPadding;
+}
+
+x-nest-collapsible-inner {
+  float:left;
+  width:100%;
+  padding:0em @elementPadding 0em @elementPadding;
+  box-sizing:border-box;
+  animation-timing-function: @animationTiming;
+  -webkit-transition: max-height @animationType;
+  -moz-transition: max-height @animationType;
+  -o-transition: max-height @animationType;
+  transition: max-height @animationType;
+  -webkit-transition: padding @animationType;
+  -moz-transition: padding @animationType;
+  -o-transition: padding @animationType;
+  transition: padding @animationType;
+  max-height: 0;
+  overflow-y: hidden;
+}
+
+.collapsibleToggleAnimation {
+  max-height: 200000px;
+  padding:@elementPadding;
+  padding-top:0em;
+}
