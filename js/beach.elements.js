@@ -155,7 +155,7 @@ nest.actions.collapsible = {
     element.outer.setAttribute('data-nest-collapsible-state', 'open');
     element.inner.classList.add('collapsibleToggleAnimation');
     element.plusminus.removeChild(element.plusminus.lastChild);
-    let minusIcon = document.createTextNode('−');
+    let minusIcon = document.createTextNode('-');
     element.plusminus.appendChild(minusIcon);
   },
 
