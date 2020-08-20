@@ -1,0 +1,175 @@
+@charset "utf-8";
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v14/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf) format('truetype');
+}
+x-nest-collapsible {
+  float: left;
+  border: 1px solid #C7CBD3;
+  border-radius: 7px;
+  width: 100%;
+  cursor: default;
+  margin-bottom: 12px;
+  background: white;
+}
+[data-element-type] x-nest-collapsible:last-of-type {
+  margin-bottom: 0px !important;
+}
+.nest-inner x-nest-collapsible:last-child {
+  margin-bottom: 0em !important;
+}
+x-nest-collapsible-trigger {
+  float: left;
+  width: 100%;
+  cursor: pointer;
+  padding: 12px;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+x-nest-collapsible-icon {
+  float: right;
+  font-size: 19px !important;
+  color: #3d434e;
+  margin-right: 2px;
+  position: relative;
+  top: 2px;
+}
+x-nest-collapsible-trigger > span {
+  font-size: 30px;
+  float: left;
+  color: #C7CBD3;
+  margin-right: 12px;
+  height: 10px;
+  position: relative;
+  top: -9px;
+}
+x-nest-collapsible-trigger h2 {
+  float: left;
+  margin: 0em;
+  padding: 0em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px !important;
+  font-weight: normal;
+  color: #3d434e;
+  margin-right: 12px;
+}
+x-nest-collapsible-inner {
+  float: left;
+  width: 100%;
+  padding: 0em 12px 0em 12px;
+  box-sizing: border-box;
+  animation-timing-function: linear;
+  -webkit-transition: max-height 0.4s;
+  -moz-transition: max-height 0.4s;
+  -o-transition: max-height 0.4s;
+  transition: max-height 0.4s;
+  -webkit-transition: padding 0.4s;
+  -moz-transition: padding 0.4s;
+  -o-transition: padding 0.4s;
+  transition: padding 0.4s;
+  max-height: 0;
+  overflow-y: hidden;
+}
+.collapsibleToggleAnimation {
+  max-height: 200000px;
+  padding: 12px;
+  padding-top: 0em;
+}
+x-nest-tab-trigger {
+  float: left;
+  padding: 12px;
+  padding-right: 0em;
+  border: 1px solid #C7CBD3;
+  border-right: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+  position: relative;
+  z-index: 9;
+  border-bottom: 1px solid white;
+}
+x-nest-tab-trigger:first-of-type {
+  -webkit-border-top-left-radius: 7px;
+  -moz-border-radius-topleft: 7px;
+  border-top-left-radius: 7px;
+}
+x-nest-tab-trigger:last-of-type {
+  -webkit-border-top-right-radius: 7px;
+  -moz-border-radius-topright: 7px;
+  border-top-right-radius: 7px;
+  border-right: 1px solid #C7CBD3;
+}
+[data-nest-tab-state="inactive"]:not(x-nest-tab-inner) {
+  background: #eff0f2;
+  border-bottom: 1px solid #C7CBD3;
+}
+[data-nest-tab-state="active"]:not(x-nest-tab-inner) {
+  border-bottom: 1px solid white;
+}
+[data-nest-tab-state="inactive"]:not(x-nest-tab-trigger) {
+  display: none;
+}
+x-nest-tab-trigger h2 {
+  float: left;
+  margin: 0em;
+  padding: 0em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 19px !important;
+  font-weight: normal;
+  color: #3d434e;
+  margin-right: 12px;
+}
+x-nest-tab-icon {
+  padding-top: 3.42857143px;
+  padding-right: 12px;
+  font-size: 19px !important;
+}
+x-nest-tab-inner {
+  float: left;
+  border: 1px solid #C7CBD3;
+  position: relative;
+  z-index: 0;
+  top: -1px;
+  width: 100%;
+  -webkit-border-radius: 7px;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius: 7px;
+  -moz-border-radius-topleft: 0;
+  border-radius: 7px;
+  border-top-left-radius: 0;
+  padding: 12px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+.nest-inner x-nest-group:last-of-type x-nest-tab-inner {
+  margin-bottom: 0em !important;
+}
+html {
+  padding: 0px;
+  margin: 0px;
+}
+/* CSS Document */
+body {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 12px;
+  font-family: "Trebuchet MS", sans-serif;
+}
