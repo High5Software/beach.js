@@ -1,3 +1,5 @@
+
+
 //bubble item for use in examples
 model.bubbleItem = [
   {
@@ -193,41 +195,50 @@ model.home = [
           ]
         },
         {
+          element : "fetch",
+          id : "jsonTest",
+          url : 'https://wax.api.simpleassets.io/v1/user/mre34.wam/assets?page=1&limit=1000&sortField=assetId&sortOrder=asc',
+          method : 'GET',
+          headers : {
+            'Content-Type': 'application/json'
+          }
+        },
+        {
           element : "tab",
-          title : "Extensibility",
           id : "extensibility-tab",
-          iconClass : "fa fa-plus",
           group : "home-tabs",
-          html : "beach.js was made for people to be able to extend it as a library and make their own custom elements. A beach element can use up to 4 aspects : an Element Definition, Properties Definition, Actions ${{testQuery.id}} Definition, and a Render Definition. You only need to create an Element Definition in order to return a component.",
-          fetch : function(element) {
+          render : async function(element) {
 
-            let options = {
-              id : 'testQuery',
-              redundancy : true,
-              triggers : ['render','click'],
-              monitor: true,
-              track : true //or array of what to track
-            };
+            //set the result
+            let result = await nest.utilities.exec({
+              id : 'jsonTest',
+              data : { name : 'bill' },
+              track_as : 'items',
+              watch : true
+            })
 
-            fetch('https://my-json-server.typicode.com/typicode/demo/comments')
-              .then(
-                function(response) {
-                  if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' + response.status);
-                    return;
-                  }
+            //loop through the data items
+            i = 0
+            elementArray = Array()
+            results = beach.data['jsonTest'].response.items.results
+            while (i < results.length) {
+              innerElement = new Object()
+              innerElement.element = 'tab';
+              innerElement.title = 'Tab ' + i
+              innerElement.text = results[i]['assetId'] + ' text'
+              elementArray.push(innerElement)
+              i++
+            }
 
-                  // Examine the text in the response
-                  response.json().then(function(data) {
-                    console.log(data);
-                  });
-                }
-              )
-              .catch(function(err) {
-                console.log('Fetch Error :-S', err);
-              });
+            //set aspects of the element
+            element.set({
+              'title' : beach.data['jsonTest'].response.items.extra.total,
+              'iconClass' : 'fa fa-star',
+              'nest' : elementArray
+            })
 
-              return options;
+            //nest.utilities.find('element', 'div').set({'title' : result.title})
+            //nest.utilities.find('class', '.blah').set({'title' : result.title})
 
           }
         }

@@ -84,6 +84,12 @@ nest.defaults.global = {
 }
 
 
+nest.defaults.fetch = {
+  method : 'GET',
+  url : null
+}
+
+
 //### collapsible element definition
 nest.element.collapsible = function() {
 
@@ -135,6 +141,7 @@ nest.properties.collapsible = {
     element.title.appendChild(titleTextContainer);
     element.outer.setAttribute('title', property);
   },
+
   //active bool, if set to true, collapsible is opened on load
   active: function(element, property) {
     property ? nest.actions.collapsible.open(element) : nest.actions.collapsible.close(element);
@@ -284,18 +291,17 @@ nest.element.tab = function(nestElement, target) {
 
 //### tab defaults
 nest.defaults.tab = {
-  title : "untitled tab"
+  title : ""
 }
-
 
 //### tab properties
 nest.properties.tab = {
   //sets the display title and title property for a tab element
   title: function(element, property) {
     let titleTextContainer = document.createTextNode(property);
-    element.title.appendChild(titleTextContainer);
-    element.trigger.setAttribute('title', property);
-    element.inner.setAttribute('title', property);
+    element.title.appendChild(titleTextContainer)
+    element.trigger.setAttribute('title', property)
+    element.inner.setAttribute('title', property)
   },
   //if set to true, this tab is active/selected after render (nest.render.tab)
   active: function(element, property) {

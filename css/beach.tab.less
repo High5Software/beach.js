@@ -12,7 +12,7 @@ x-nest-tab-trigger {
   user-select: none; /* Standard */
   position:relative;
   z-index:9;
-  border-bottom:1px solid white;
+  border-bottom:1px solid transparent;
 }
 
 
@@ -35,7 +35,7 @@ x-nest-tab-trigger:last-of-type {
 }
 
 [data-nest-tab-state="active"]:not(x-nest-tab-inner) {
-  border-bottom:1px solid white;
+  border-bottom:1px solid transparent;
 }
 
 [data-nest-tab-state="inactive"]:not(x-nest-tab-trigger) {

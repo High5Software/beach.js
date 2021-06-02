@@ -5,6 +5,18 @@
   <meta http-equiv="expires" content="-1" />
   <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
   <meta http-equiv="pragma" content="no-cache" />
+
+  <!-- css -->
+  <?php
+
+  // convert the less to css
+  if (strtolower($_SERVER["HTTP_HOST"]) == "local.host" || strtolower($_SERVER["HTTP_HOST"]) == "127.0.0.1") {
+      exec("lessc css/beach.styles.less css/beach.styles.css");
+  }
+
+  ?>
+
+
   <link rel="stylesheet" href="css/beach.styles.css"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <script type="text/javascript" src="js/beach.core.js"></script>
