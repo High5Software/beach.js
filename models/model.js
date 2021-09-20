@@ -1,5 +1,4 @@
 
-
 //bubble item for use in examples
 model.bubbleItem = [
   {
@@ -197,7 +196,7 @@ model.home = [
         {
           element : "fetch",
           id : "jsonTest",
-          url : 'https://wax.api.simpleassets.io/v1/user/mre34.wam/assets?page=1&limit=1000&sortField=assetId&sortOrder=asc',
+          url : 'https://wax.api.simpleassets.io/v1/user/bv3au.wam/assets?page=1&limit=1000&sortField=assetId&sortOrder=asc',
           method : 'GET',
           headers : {
             'Content-Type': 'application/json'
@@ -210,9 +209,13 @@ model.home = [
           render : async function(element) {
 
             //set the result
-            let result = await nest.utilities.exec({
+            await nest.utilities.exec({
               id : 'jsonTest',
-              data : { name : 'bill' },
+              data : {
+                name : function() {
+                  return beach.data['jsonTest'].response.items.results[1]['assetId']
+                }
+              },
               track_as : 'items',
               watch : true
             })
@@ -231,18 +234,24 @@ model.home = [
             }
 
             //set aspects of the element
+            numberTitle = beach.data['jsonTest'].response.items.extra.total
+
+            //TODO: Add to docs
             element.set({
-              'title' : beach.data['jsonTest'].response.items.extra.total,
+              'title' : numberTitle,
               'iconClass' : 'fa fa-star',
               'nest' : elementArray
             })
 
-            //nest.utilities.find('element', 'div').set({'title' : result.title})
-            //nest.utilities.find('class', '.blah').set({'title' : result.title})
+            //TODO: Create method for and add to docs
+            console.log(nest.utilities.find({
+              'element' : 'collapsible'
+            }))
+
+            //console.log(nest.utilities.find('element', 'tab').set({'title' : numberTitle}))
 
           }
         }
-
       ]
     },
     {

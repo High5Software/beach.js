@@ -22,7 +22,6 @@
   <script type="text/javascript" src="js/beach.core.js"></script>
   <script type="text/javascript" src="js/beach.elements.js"></script>
   <script type="text/javascript" src="models/model.js"></script>
-
   <style type="text/css">
   x-nest-fancy-button {
     border-radius:8px;
@@ -64,11 +63,40 @@
 
 </head>
 <body>
-  <div id="nest-container" data-nest="home">
+  <!-- <div id="nest-container" data-nest="home">
+
+  </div> -->
+
+  <div id="nest-remote" >
 
   </div>
 </body>
 <script type="text/javascript">
+
+fetch('https://wax.api.atomicassets.io/atomicmarket/v1/assets/1099560596079')
+  .then(response => response.json())
+  .then(function(data) {
+
+    if (data.success == true) {
+        parent_element = data.data.immutable_data
+
+        console.log(parent_element)
+
+        if (typeof data.data.immutable_data.nest !== 'undefined') {
+          nextNest = data.data.immutable_data.nest
+          fetch('https://wax.api.atomicassets.io/atomicmarket/v1/assets/' + nextNest)
+            .then(response => response.json())
+            .then(function(data) {
+                parent_element.nest = [data.data.immutable_data]
+                model.remote  = [parent_element]
+                    document.getElementById('nest-remote').nest(model.remote);
+            })
+        }
+    }
+  }
+);
+
+
 //you can also activate programmatically
 // document.addEventListener("DOMContentLoaded", function(event) {
 //     document.getElementById('nest-container').nest(model.home);

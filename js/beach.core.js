@@ -6,14 +6,13 @@
 //                 Contact : bena@h5sw.com
 //                 License : MIT License
 //
-//########################################################################################//
+//############################################################################################//
 //TODO: Bring in the global properties to the element definitions programatically so they are accessible via data
 
 
 //### define the arrays and object for use in element definition and core functionality
 const beach = Array()
 beach.data = Array()
-
 const nest = Array()
 const model = Array()
 let nestObjects = ["element", "defaults", "properties", "actions", "render"]
@@ -38,12 +37,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 });
 
-
-
 //### the prototype to call nest on an element - ie: document.body.nest(model)
 Element.prototype.nest = function(model, sentParent) {
   if (typeof sentParent == 'undefined') {
-      sentParent = this
+    sentParent = this
   }
   try {
 
@@ -53,10 +50,8 @@ Element.prototype.nest = function(model, sentParent) {
       nest.utilities.sort(element)
 
       //apply defaults and properties to element
-
       let buildElement = nest.return.elementModel(element, sentParent);
       buildElement._model = buildElement
-
       nest.apply.defaults(buildElement)
       nest.apply.css(buildElement)
       nest.apply.attributes(buildElement)
@@ -81,39 +76,98 @@ Element.prototype.nest = function(model, sentParent) {
         })
       }
 
-      //don't include virtual elements like the data layer objects
-      //TODO: error occurring here cause by grouping an element using "group" property -- need to get fixed!
-      if (!nest.virtualElements.includes(buildElement._element)) {
-        try {sentParent.appendChild(buildElement.outer);} catch(err) {
-          //console.log(err);
-        };
-      }
-
+      model[elementCount]._build = buildElement
+      sentParent.appendChild(buildElement.outer)
       nest.apply.render(buildElement);
 
       switch (typeof element.nest) {
-        case 'undefined':
-          break;
-
         case 'function':
           buildElement.outer.nest(element.nest(element), buildElement.inner)
           break;
 
-        default:
+        case 'object':
           buildElement.outer.nest(element.nest, buildElement.inner)
           break;
       }
+
     });
   }
+
   catch(err) {
     console.log(err)
     throw 'The nest model is not defined properly (check for typos)'
   }
 };
 
-
 //### utilties for internal use throught the nest.core
 nest.utilities = {
+
+
+  object : null,
+  set_object : null,
+
+
+  findLoop(whatToFind, modelIn, outputArray, foundItem = false) {
+
+    if (typeof responseArray == 'undefined') {
+      responseArray = Array()
+    }
+
+    modelIn.forEach(function(modelElement, modelCount) {
+      if (typeof modelElement.nest !== 'undefined') {
+        if (typeof modelElement.nest !== 'function') {
+
+            Object.keys(whatToFind).forEach(function(whatToFindKey, whatToFindCount) {
+              //check to see if the key exists
+              if (typeof modelElement[whatToFindKey] !== 'undefined') {
+
+                // check if it is the same value
+                if (modelElement[whatToFindKey] == whatToFind[whatToFindKey]) {
+                  outputArray.push(modelElement)
+                }
+
+              }
+            })
+
+        }
+      }
+    })
+
+    // set the output response
+    responseArray['whatToFind'] = whatToFind
+    responseArray['modelIn'] = modelIn
+    responseArray['outputArray'] = outputArray
+    responseArray['foundItem'] = foundItem
+
+    return responseArray
+
+  },
+
+
+
+  // method to find a nest object in the model
+  find(whatToFind, modelIn = model) {
+
+    // create the array of the model elements we are dealing with
+    modelKeys = Array()
+    Object.keys(model).forEach(function(modelKey, modelKeyCount) {
+      if (typeof result == 'undefined') {
+        result = nest.utilities.findLoop(whatToFind, model[modelKey], Array())
+      } else {
+        result = nest.utilities.findLoop(result['whatToFind'], result['modelIn'], result['outputArray'], result['foundItem'])
+      }
+    })
+
+    // NOTE : Only search the primary model, model can also be passed
+    return result
+
+  },
+
+  set(details) {
+      this.set_object = 'gfdf'
+      return this
+  },
+
 
   //TODO: Combine the fetch object with the query call in actions and use defaults to fill blanks
   exec : async function(requestDetails) {
@@ -131,7 +185,6 @@ nest.utilities = {
       if (typeof dataObject !== 'undefined' && beach.data[requestDetails.id].method !== 'GET') {
         fetchData.body = JSON.stringify(dataObject)
       }
-
 
       Object.keys(beach.data[name]).forEach(function(keyName, keyCount) {
         if (keyName !== 'element' && keyName !== 'id') {
@@ -197,8 +250,8 @@ nest.utilities = {
 
     return checkResult
   }
-};
 
+};
 
 
 //### returns a nest or basic dom "element model" back to the nest prototype
@@ -252,7 +305,6 @@ nest.apply = {
       });
     }
   },
-
 
   //applies css styling to the element
   css : function(elementModel) {
@@ -360,16 +412,16 @@ nest.apply = {
 
   //apply things after the element has rendered
   render: function(elementModel) {
-
     var elementType = elementModel._element
     typeof nest.render[elementType] !== 'undefined' && nest.render[elementType](elementModel)
     typeof nestElement.render !== 'undefined' && nestElement.render(elementModel)
-
   }
+
 };
 
 //## for creating logical linking elements such as groups
 nest.create = {
+
   //for registering group elements - like tabs
   group: function(nestElement, target) {
 
@@ -390,6 +442,7 @@ nest.create = {
 
       return outer;
   }
+
 };
 
 //### for registering the element components when creating an element
